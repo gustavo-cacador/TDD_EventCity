@@ -1,14 +1,11 @@
 package com.devsuperior.bds02.services;
 
-import com.devsuperior.bds02.dto.CityDTO;
 import com.devsuperior.bds02.dto.EventDTO;
 import com.devsuperior.bds02.entities.City;
 import com.devsuperior.bds02.entities.Event;
-import com.devsuperior.bds02.repositories.CityRepository;
 import com.devsuperior.bds02.repositories.EventRepository;
 import com.devsuperior.bds02.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,11 +14,8 @@ public class EventService {
 
     private final EventRepository eventRepository;
 
-    private final CityRepository cityRepository;
-
-    public EventService(EventRepository eventRepository, CityRepository cityRepository) {
+    public EventService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
-        this.cityRepository = cityRepository;
     }
 
     @Transactional
