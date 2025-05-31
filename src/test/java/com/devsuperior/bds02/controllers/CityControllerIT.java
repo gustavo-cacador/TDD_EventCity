@@ -38,9 +38,9 @@ public class CityControllerIT {
 					.contentType(MediaType.APPLICATION_JSON));
 
 		result.andExpect(status().isOk());
-		result.andExpect(jsonPath("$[0].name").value("Belo Horizonte"));
-		result.andExpect(jsonPath("$[1].name").value("Belém"));
-		result.andExpect(jsonPath("$[2].name").value("Brasília"));
+		result.andExpect(jsonPath("$[0].name").value("São Paulo"));
+		result.andExpect(jsonPath("$[1].name").value("Brasília"));
+		result.andExpect(jsonPath("$[2].name").value("Fortaleza"));
 	}
 	
 	@Test
@@ -60,7 +60,9 @@ public class CityControllerIT {
 		result.andExpect(jsonPath("$.name").value("Recife"));
 	}
 
+	// qnd vamos tentar apagar uma cidade na qual NÃO tem evento, ele apaga, porém qnd temos um evento cadastrado numa cidade, ele n deveria apagar
 	@Test
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public void deleteShouldReturnNoContentWhenIndependentId() throws Exception {		
 		
 		Long independentId = 5L;
@@ -84,7 +86,7 @@ public class CityControllerIT {
 	}
 
 	@Test
-	@Transactional(propagation = Propagation.NEVER) 
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public void deleteShouldReturnBadRequestWhenDependentId() throws Exception {		
 
 		Long dependentId = 1L;
